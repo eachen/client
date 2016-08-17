@@ -20,7 +20,7 @@ class panel(wx.Panel):
     def onclick(self,event):
         self.clientSkt=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.clientSkt.connect(("127.0.0.1",9999))
-        tread=threading.Thread(target=self.recive,args=(self.clientSkt))
+        tread=threading.Thread(target=self.recive,args=(self.clientSkt,))
         tread.start()
     def recive(self,skt):
         print skt.recv(1024)
