@@ -15,15 +15,17 @@ class frame(wx.Frame):
 class panel(wx.Panel):
     def __init__(self,parent):
         wx.Panel.__init__(self,parent,-1,pos=(50,50),size=(100,100))
-        self.button=wx.Button(self,-1,label=('test'))
+        self.button=wx.Button(self,-1,label=('connect service'))
         self.Bind(wx.EVT_BUTTON, self.onclick, self.button)
         self.button1=wx.Button(self,-1,label=('send'),pos=(30,30))
         self.Bind(wx.EVT_BUTTON, self.onSend, self.button1)
-    def onclick(self,event):
         self.clientSkt=socket.socket()
+        
+    def onclick(self,event):
         self.clientSkt.connect(("127.0.0.1",9999))
         self.tread=threading.Thread(target=self.recive,args=(self.clientSkt,))
         self.tread.start()
+        
     def onSend(self,event):
         self.clientSkt.send('do you a service?')
         
